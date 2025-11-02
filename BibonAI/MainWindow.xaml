@@ -1,0 +1,41 @@
+﻿<Window x:Class = "BibonAI.MainWindow"
+        xmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+        Title = "BibonAI – Admin" Height = "420" Width = "740"
+        Loaded = "Window_Loaded">
+    <Grid Margin = "16">
+        <DockPanel>
+            <StackPanel Orientation = "Horizontal" DockPanel.Dock = "Top" Margin = "0,0,0,8">
+                <TextBlock Text = "PC List (Firebase)" FontSize = "18" FontWeight = "Bold" VerticalAlignment = "Center"/>
+                <Button Content = "Обновить" Width = "120" Margin = "12,0,0,0" Click = "Refresh_Click"/>
+                <Button Content = "Проверить (Ping)" Width = "150" Margin = "12,0,0,0" Click = "PingAll_Click"/>
+                <TextBlock x:Name = "Status" Margin = "12,0,0,0" VerticalAlignment = "Center"/>
+            </StackPanel>
+
+            <ListView x:Name = "PcList">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header = "Key" Width = "180" DisplayMemberBinding = "{Binding Key}"/>
+
+
+                        <GridViewColumn Header = "PC Name" Width = "140" DisplayMemberBinding = "{Binding PcName}"/>
+                        <GridViewColumn Header = "Online" Width = "80" DisplayMemberBinding = "{Binding OnlineText}"/>
+                        <GridViewColumn Header = "User" Width = "120" DisplayMemberBinding = "{Binding UserName}"/>
+                        <GridViewColumn Header = "City" Width = "120" DisplayMemberBinding = "{Binding City}"/>
+
+
+                        <GridViewColumn Header = "Start" Width = "150" DisplayMemberBinding = "{Binding StartTime}"/>
+                        <GridViewColumn Header = "Stop" Width = "150" DisplayMemberBinding = "{Binding StopTime}"/>
+
+
+                        <GridViewColumn Header = "Local IP" Width = "130" DisplayMemberBinding = "{Binding LocalIp}"/>
+                        <GridViewColumn Header = "Country" Width = "80" DisplayMemberBinding = "{Binding Country}"/>
+                        <GridViewColumn Header = "Region" Width = "120" DisplayMemberBinding = "{Binding Region}"/>
+                        <GridViewColumn Header = "IP" Width = "140" DisplayMemberBinding = "{Binding InternetIp}"/>
+
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+    </Grid>
+</Window>

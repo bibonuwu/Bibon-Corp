@@ -1,0 +1,201 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|c:\\users\\bibonk\\desktop\\bibon corp\\bibonai\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\commandwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|solutionrelative:commandwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\commandwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|solutionrelative:commandwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EA7D96B2-122E-4D5E-B6B4-AF42EA411249}|..\\ClientBibon\\ClientBibon.csproj|c:\\users\\bibonk\\desktop\\bibon corp\\clientbibon\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\firebasertdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|solutionrelative:firebasertdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{7D4E2611-9771-4547-835C-CFC1C9FCC782}|BibonAI.csproj|solutionrelative:app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\bibonk\\Desktop\\ClientBibon\\MainWindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\bibonk\\Desktop\\ClientBibon\\FirebaseRtdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\bibonk\\Desktop\\ClientBibon\\MainWindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\bibonk\\Desktop\\ClientBibon\\App.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CommandWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\CommandWindow.xaml.cs",
+              "RelativeDocumentMoniker": "CommandWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\CommandWindow.xaml.cs*",
+              "RelativeToolTip": "CommandWindow.xaml.cs*",
+              "ViewState": "AgIAADIAAAAAAAAAAAAqwFQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-02T15:05:04.861Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CommandWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\CommandWindow.xaml",
+              "RelativeDocumentMoniker": "CommandWindow.xaml",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\CommandWindow.xaml*",
+              "RelativeToolTip": "CommandWindow.xaml*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-11-02T15:04:53.061Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\ClientBibon\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "..\\ClientBibon\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\ClientBibon\\MainWindow.xaml.cs*",
+              "RelativeToolTip": "..\\ClientBibon\\MainWindow.xaml.cs*",
+              "ViewState": "AgIAACIBAAAAAAAAAAAmwGcBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-02T15:02:57.654Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAwwBwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T22:46:22.961Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\ClientBibon\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "..\\ClientBibon\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\ClientBibon\\MainWindow.xaml",
+              "RelativeToolTip": "..\\ClientBibon\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-30T22:46:39.606Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-30T22:46:23.012Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "FirebaseRtdb.cs",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\ClientBibon\\FirebaseRtdb.cs",
+              "RelativeDocumentMoniker": "..\\ClientBibon\\FirebaseRtdb.cs",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\ClientBibon\\FirebaseRtdb.cs",
+              "RelativeToolTip": "..\\ClientBibon\\FirebaseRtdb.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAcwEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T22:47:02.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\ClientBibon\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "..\\ClientBibon\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\ClientBibon\\MainWindow.xaml.cs",
+              "RelativeToolTip": "..\\ClientBibon\\MainWindow.xaml.cs",
+              "ViewState": "AgIAANEAAAAAAAAAAAAmwPIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T22:46:39.411Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FirebaseRtdb.cs",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\FirebaseRtdb.cs",
+              "RelativeDocumentMoniker": "FirebaseRtdb.cs",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\FirebaseRtdb.cs",
+              "RelativeToolTip": "FirebaseRtdb.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-30T22:46:56.923Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\ClientBibon\\App.config",
+              "RelativeDocumentMoniker": "..\\ClientBibon\\App.config",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\ClientBibon\\App.config",
+              "RelativeToolTip": "..\\ClientBibon\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-10-30T22:49:07.44Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.config",
+              "DocumentMoniker": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\App.config",
+              "RelativeDocumentMoniker": "App.config",
+              "ToolTip": "C:\\Users\\bibonk\\Desktop\\Bibon Corp\\BibonAI\\App.config",
+              "RelativeToolTip": "App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-10-30T22:48:17.688Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

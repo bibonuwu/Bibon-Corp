@@ -1,0 +1,21 @@
+﻿<Window x:Class="BibonAI.CommandWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Команда на ПК" Height="180" Width="520" WindowStartupLocation="CenterOwner">
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Команда:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <TextBox x:Name="CmdBox" MinWidth="360" Margin="0,0,8,0"/>
+            <Button Content="Отправить" Width="120" Click="Send_Click"/>
+        </StackPanel>
+
+        <TextBlock x:Name="Status" Grid.Row="1" Margin="0,8,0,0"/>
+        <TextBox x:Name="ResultBox" Grid.Row="2" Margin="0,8,0,0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+    </Grid>
+</Window>
