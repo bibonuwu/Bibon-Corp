@@ -28,3 +28,20 @@ C:\Users\bibonk\Desktop\Bibon Corp\ClientBibon\obj\Debug\ClientBibon.pdb
 C:\Users\bibonk\Desktop\Bibon Corp\ClientBibon\bin\Debug\ClientBibon.exe.config
 C:\Users\bibonk\Desktop\Bibon Corp\ClientBibon\bin\Debug\ClientBibon.exe
 C:\Users\bibonk\Desktop\Bibon Corp\ClientBibon\bin\Debug\ClientBibon.pdb
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\bin\Debug\ClientBibon.exe.config
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\bin\Debug\ClientBibon.exe
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\bin\Debug\ClientBibon.pdb
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ClientBibon.csproj.AssemblyReference.cache
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ClientBibon.exe.config
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ChatWindow.baml
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\MainWindow.baml
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ChatWindow.g.cs
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\MainWindow.g.cs
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\App.g.cs
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ClientBibon_MarkupCompile.cache
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ClientBibon.g.resources
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ClientBibon.Properties.Resources.resources
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ClientBibon.csproj.GenerateResource.cache
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ClientBibon.csproj.CoreCompileInputs.cache
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ClientBibon.exe
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\ClientBibon.pdb

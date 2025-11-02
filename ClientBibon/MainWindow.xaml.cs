@@ -9,6 +9,7 @@ using System.Timers;
 using System.Web.Script.Serialization;      // System.Web.Extensions
 using System.Windows;
 using System.Collections.Generic;
+using SharedChat; // чтобы видеть ChatWindow
 
 namespace ClientBibon
 {
@@ -22,13 +23,38 @@ namespace ClientBibon
         private Timer _pingPollTimer;               // пинг от админки
         private string _lastPingToken = "";
 
-
+     
+        private ChatWindow _chatWindow;
+        private System.Timers.Timer _chatWatcher;
         // MainWindow.xaml.cs (ClientBibon)
         private System.Timers.Timer _cmdPollTimer;
         private string _lastCmdId = "";
 
         private string PathCmdNode() => $"PC List/{_pcKey}/Comands";
-        private static string JsonEscape(string s) => (s ?? "").Replace("\\", "\\\\").Replace("\"", "\\\"");
+        private static string JsonEscape(string s)
+        {
+            if (s == null) return "";
+            var sb = new System.Text.StringBuilder(s.Length + 32);
+            foreach (var ch in s)
+            {
+                switch (ch)
+                {
+                    case '\\': sb.Append("\\\\"); break;
+                    case '\"': sb.Append("\\\""); break;
+                    case '\n': sb.Append("\\n"); break;
+                    case '\r': sb.Append("\\r"); break;
+                    case '\t': sb.Append("\\t"); break;
+                    case '\b': sb.Append("\\b"); break;
+                    case '\f': sb.Append("\\f"); break;
+                    default:
+                        if (ch < 32) sb.Append("\\u").Append(((int)ch).ToString("x4"));
+                        else sb.Append(ch);
+                        break;
+                }
+            }
+            return sb.ToString();
+        }
+
 
         public MainWindow()
         {
@@ -60,6 +86,7 @@ namespace ClientBibon
             await SetOnlineAsync(true);   // 1
             StartPingPoll();              // слушаем пинги админки
             StartCmdPoll();   // после StartPingPoll();
+            StartChatWatcher();   // <-- не забудь это
 
         }
 
@@ -247,6 +274,9 @@ namespace ClientBibon
                     await fb.PutRawJsonAsync(PathOnline("stop_time"),
                         "\"" + NowLocal() + "\"");
                 }
+
+                _chatWatcher?.Stop();
+                _chatWatcher?.Dispose();
             }
             catch { }
         }
@@ -272,16 +302,16 @@ namespace ClientBibon
 
         private static async Task<(int exitCode, string stdout, string stderr)> RunCommandAsync(string cmd)
         {
-            // Универсально: через cmd.exe. Подходит и для "calc", и для "ipconfig /all".
             var psi = new System.Diagnostics.ProcessStartInfo
             {
                 FileName = "cmd.exe",
-                Arguments = "/c " + cmd,
+                Arguments = "/c chcp 65001>nul & " + cmd,   // переключаем консоль на UTF-8
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                WorkingDirectory = Environment.GetFolderPath(Environment.SpecialFolder.System)
+                StandardOutputEncoding = System.Text.Encoding.UTF8,
+                StandardErrorEncoding = System.Text.Encoding.UTF8
             };
 
             using (var p = System.Diagnostics.Process.Start(psi))
@@ -292,6 +322,7 @@ namespace ClientBibon
                 return (p.ExitCode, stdout, stderr);
             }
         }
+
 
         private async Task PollCommandAsync()
         {
@@ -335,11 +366,12 @@ namespace ClientBibon
                 }
 
                 // 2) выполняем
+                // 2) выполняем
                 int exitCode = -1;
                 string stdout = "", stderr = "";
                 try
                 {
-                    var r = await RunCommandAsync(cmdText); // используем cmdText тут
+                    var r = await RunCommandAsync(cmdText);
                     exitCode = r.exitCode;
                     stdout = r.stdout;
                     stderr = r.stderr;
@@ -349,32 +381,82 @@ namespace ClientBibon
                     stderr = ex.Message;
                 }
 
-                // 3) пишем результат
+                // 3) пишем РАЗДЕЛЬНО: сначала быстрый маленький ответ
                 using (var fb = new Shared.FirebaseRtdb(BaseUrl, AuthToken))
                 {
-                    var done = "{"
-                        + $"\"id\":\"{JsonEscape(_lastCmdId)}\","
-                        + $"\"cmd\":\"{JsonEscape(cmdText)}\","
-                        + "\"status\":\"done\","
-                        + $"\"exitCode\":{exitCode},"
-                        + $"\"stdout\":\"{JsonEscape(stdout)}\","
-                        + $"\"stderr\":\"{JsonEscape(stderr)}\","
-                        + $"\"worker\":\"{JsonEscape(_pcKey)}\""
-                        + "}";
-                    await fb.PutRawJsonAsync(PathCmdNode(), done);
+                    // done + код выхода (минимальный JSON) — прилетит почти мгновенно
+                    await fb.PutRawJsonAsync(PathCmdNode() + "/status", "\"done\"");
+                    await fb.PutRawJsonAsync(PathCmdNode() + "/exitCode", exitCode.ToString());
+                    await fb.PutRawJsonAsync(PathCmdNode() + "/cmd", $"\"{JsonEscape(cmdText)}\"");
+                    await fb.PutRawJsonAsync(PathCmdNode() + "/id", $"\"{JsonEscape(_lastCmdId)}\"");
+                    await fb.PutRawJsonAsync(PathCmdNode() + "/worker", $"\"{JsonEscape(_pcKey)}\"");
 
-                    // (опционально) автоочистка, чтобы не повторялось после рестарта:
-                    // await Task.Delay(500);
-                    // await fb.PutRawJsonAsync(PathCmdNode(), "null");
+                    // потом — крупные поля, но уже не блокируют отображение результата
+                    var outSafe = Trunc(stdout, 60000); // ~60 KB
+                    var errSafe = Trunc(stderr, 60000);
+                    await fb.PutRawJsonAsync(PathCmdNode() + "/stdout", $"\"{JsonEscape(outSafe)}\"");
+                    await fb.PutRawJsonAsync(PathCmdNode() + "/stderr", $"\"{JsonEscape(errSafe)}\"");
                 }
+
             }
             catch
             {
                 // не даём таймеру упасть
             }
         }
+        private static string Trunc(string s, int max)
+        {
+            if (string.IsNullOrEmpty(s)) return "";
+            if (s.Length <= max) return s;
+            return s.Substring(0, max) + "\n... [truncated]";
+        }
 
 
+
+        private void StartChatWatcher()
+        {
+            if (_chatWatcher != null) { _chatWatcher.Stop(); _chatWatcher.Dispose(); }
+            _chatWatcher = new System.Timers.Timer(1000) { AutoReset = true };
+            _chatWatcher.Elapsed += async (s, e) =>
+            {
+                if (string.IsNullOrEmpty(_pcKey)) return;
+                try
+                {
+                    using (var fb = new FirebaseRtdb(BaseUrl, AuthToken))
+                    {
+                        var json = await fb.GetJsonAsync($"PC List/{_pcKey}/Chat/Chat Online or ofline/ON");
+                        bool on = !string.IsNullOrEmpty(json) && json.Trim() == "1";
+
+                        if (on)
+                        {
+                            if (_chatWindow == null || !_chatWindow.IsVisible)
+                            {
+                                Dispatcher.Invoke(() =>
+                                {
+                                    _chatWindow = new SharedChat.ChatWindow(BaseUrl, AuthToken, _pcKey, Environment.UserName, false)
+                                    { Owner = this };
+                                    _chatWindow.Show();
+                                });
+                            }
+                        }
+                        else
+                        {
+                            // <-- Важная часть: закрыть чат у клиента, если админ поставил ON=0
+                            if (_chatWindow != null && _chatWindow.IsVisible)
+                            {
+                                Dispatcher.Invoke(() =>
+                                {
+                                    _chatWindow.Close();
+                                    _chatWindow = null;
+                                });
+                            }
+                        }
+                    }
+                }
+                catch { /* глушим ошибки */ }
+            };
+            _chatWatcher.Start();
+        }
 
 
 

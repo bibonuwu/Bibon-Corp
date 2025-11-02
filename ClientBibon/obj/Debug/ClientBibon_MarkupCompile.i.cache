@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\bibonk\Desktop\ClientBibon\obj\Debug\
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\obj\Debug\
 ClientBibon
 none
 false
 DEBUG;TRACE
-C:\Users\bibonk\Desktop\ClientBibon\App.xaml
-1219584333
+C:\Users\bibonk\Desktop\Bibon-Corp\ClientBibon\App.xaml
+21791022669
 
-71509918478
+81892758742
 14-1801895948
-MainWindow.xaml;
+ChatWindow.xaml;MainWindow.xaml;
 
-False
+True
 

@@ -16,6 +16,8 @@ namespace Shared
         {
             _baseUrl = baseUrl.TrimEnd('/');
             _authToken = authToken;
+            _http.DefaultRequestHeaders.CacheControl = new System.Net.Http.Headers.CacheControlHeaderValue { NoCache = true };
+
         }
 
         private static string EncodePath(string path)

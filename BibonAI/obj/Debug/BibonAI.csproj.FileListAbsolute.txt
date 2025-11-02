@@ -30,3 +30,22 @@ C:\Users\bibonk\Desktop\Bibon Corp\BibonAI\obj\Debug\BibonAI.csproj.GenerateReso
 C:\Users\bibonk\Desktop\Bibon Corp\BibonAI\obj\Debug\BibonAI.csproj.CoreCompileInputs.cache
 C:\Users\bibonk\Desktop\Bibon Corp\BibonAI\obj\Debug\BibonAI.exe
 C:\Users\bibonk\Desktop\Bibon Corp\BibonAI\obj\Debug\BibonAI.pdb
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\bin\Debug\BibonAI.exe.config
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\bin\Debug\BibonAI.exe
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\bin\Debug\BibonAI.pdb
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\BibonAI.csproj.AssemblyReference.cache
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\BibonAI.exe.config
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\CommandWindow.baml
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\MainWindow.baml
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\CommandWindow.g.cs
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\MainWindow.g.cs
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\App.g.cs
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\BibonAI_MarkupCompile.cache
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\BibonAI.g.resources
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\BibonAI.Properties.Resources.resources
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\BibonAI.csproj.GenerateResource.cache
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\BibonAI.csproj.CoreCompileInputs.cache
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\BibonAI.exe
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\BibonAI.pdb
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\ChatWindow.baml
+C:\Users\bibonk\Desktop\Bibon-Corp\BibonAI\obj\Debug\ChatWindow.g.cs
