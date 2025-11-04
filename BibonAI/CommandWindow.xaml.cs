@@ -27,11 +27,15 @@ namespace BibonAI
         }
 
 
-        private void OpenChat_Click(object sender, RoutedEventArgs e)
+        private async void OpenChat_Click(object sender, RoutedEventArgs e)
         {
+            using (var fb = new FirebaseRtdb(_baseUrl, _authToken))
+                await fb.PutRawJsonAsync($"PC List/{_pcKey}/Chat/Control/AdminOpen", "1");
+
             var chat = new ChatWindow(_baseUrl, _authToken, _pcKey, "Admin", true) { Owner = this };
-            chat.Show(); // отдельное окно; можно ShowDialog(), как удобнее
+            chat.Show();
         }
+
         private static string JsonEscape(string s) => (s ?? "").Replace("\\", "\\\\").Replace("\"", "\\\"");
         private string PathCmdNode() => $"PC List/{_pcKey}/Comands";
 
@@ -101,8 +105,6 @@ namespace BibonAI
                                 return;
                             }
                         }
-
-
 
                         if (status == "running")
                             Status.Text = "Выполняется…";   // мгновенная обратная связь

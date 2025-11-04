@@ -22,10 +22,9 @@ namespace ClientBibon
         private string _pcKey;                      // "PC_45_23_54_32"
         private Timer _pingPollTimer;               // пинг от админки
         private string _lastPingToken = "";
+        private System.Timers.Timer _adminOpenPoll;
+        private ChatWindow _chat;
 
-     
-        private ChatWindow _chatWindow;
-        private System.Timers.Timer _chatWatcher;
         // MainWindow.xaml.cs (ClientBibon)
         private System.Timers.Timer _cmdPollTimer;
         private string _lastCmdId = "";
@@ -59,7 +58,6 @@ namespace ClientBibon
         public MainWindow()
         {
             InitializeComponent();
-            this.Closing += MainWindow_Closing;
 
             // На случай жесткого завершения процесса
             AppDomain.CurrentDomain.ProcessExit += (s, e) =>
@@ -82,13 +80,18 @@ namespace ClientBibon
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await RegisterAsync();        // создаём узлы и пишем Online or ofline + System Information
-            await SetOnlineAsync(true);   // 1
-            StartPingPoll();              // слушаем пинги админки
-            StartCmdPoll();   // после StartPingPoll();
-            StartChatWatcher();   // <-- не забудь это
+            await RegisterAsync();
+            await SetOnlineAsync(true);
+            StartPingPoll();
+            StartCmdPoll();
 
+            // БЫЛО:
+            // StartChatWatcher();
+
+            // СТАЛО: реагируем только на команду админа
+            StartAdminOpenWatcher(BaseUrl, AuthToken, _pcKey, Environment.UserName);
         }
+
 
         private async void Repeat_Click(object sender, RoutedEventArgs e)
         {
@@ -125,7 +128,43 @@ namespace ClientBibon
             return "";
         }
 
+        private void StartAdminOpenWatcher(string baseUrl, string authToken, string pcKey, string myName)
+        {
+            _adminOpenPoll = new System.Timers.Timer(1000) { AutoReset = true };
+            _adminOpenPoll.Elapsed += async (_, __) =>
+            {
+                try
+                {
+                    using (var fb = new FirebaseRtdb(baseUrl, authToken))
+                    {
+                        var v = await fb.GetJsonAsync($"PC List/{pcKey}/Chat/Control/AdminOpen");
+                        bool adminWantsOpen = v == "1";
 
+                        Dispatcher.Invoke(async () =>
+                        {
+                            if (adminWantsOpen)
+                            {
+                                // если админ просит открыть и окно ещё не открыто — открываем
+                                if (_chat == null || !_chat.IsVisible)
+                                {
+                                    _chat = new SharedChat.ChatWindow(baseUrl, authToken, pcKey, myName, false);
+                                    _chat.Show();
+                                    // ChatWindow сам проставит ClientOpen=1 и ClientOnline=1
+                                }
+                            }
+                            else
+                            {
+                                // админ закрыл у себя — закрываемся
+                                if (_chat != null && _chat.IsVisible)
+                                    _chat.Close(); // ChatWindow_Closing проставит ClientOpen=0/ClientOnline=0
+                            }
+                        });
+                    }
+                }
+                catch { }
+            };
+            _adminOpenPoll.Start();
+        }
 
         private class IpInfo
         {
@@ -174,7 +213,7 @@ namespace ClientBibon
                 string internetIp = !string.IsNullOrEmpty(ipinfo.ip) ? ipinfo.ip : await FallbackPublicIpAsync();
 
                 // ключ узла
-                _pcKey = "PC_" + internetIp.Replace(".", "_") + "_Name:_" + userName.Replace(".", "_");
+                _pcKey = "PC_" + pcName.Replace(".", "_") + "_" + userName.Replace(".", "_");
 
                 using (var fb = new FirebaseRtdb(BaseUrl, AuthToken))
                 {
@@ -262,25 +301,7 @@ namespace ClientBibon
 
 
         // ===================== ЗАКРЫТИЕ ======================
-        private async void MainWindow_Closing(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                if (_pingPollTimer != null) { _pingPollTimer.Stop(); _pingPollTimer.Dispose(); }
-
-                using (var fb = new FirebaseRtdb(BaseUrl, AuthToken))
-                {
-                    await fb.PutRawJsonAsync(PathOnline("PC Online or offline"), "0");
-                    await fb.PutRawJsonAsync(PathOnline("stop_time"),
-                        "\"" + NowLocal() + "\"");
-                }
-
-                _chatWatcher?.Stop();
-                _chatWatcher?.Dispose();
-            }
-            catch { }
-        }
-
+      
 
 
         private void StartCmdPoll()
@@ -413,50 +434,7 @@ namespace ClientBibon
 
 
 
-        private void StartChatWatcher()
-        {
-            if (_chatWatcher != null) { _chatWatcher.Stop(); _chatWatcher.Dispose(); }
-            _chatWatcher = new System.Timers.Timer(1000) { AutoReset = true };
-            _chatWatcher.Elapsed += async (s, e) =>
-            {
-                if (string.IsNullOrEmpty(_pcKey)) return;
-                try
-                {
-                    using (var fb = new FirebaseRtdb(BaseUrl, AuthToken))
-                    {
-                        var json = await fb.GetJsonAsync($"PC List/{_pcKey}/Chat/Chat Online or ofline/ON");
-                        bool on = !string.IsNullOrEmpty(json) && json.Trim() == "1";
-
-                        if (on)
-                        {
-                            if (_chatWindow == null || !_chatWindow.IsVisible)
-                            {
-                                Dispatcher.Invoke(() =>
-                                {
-                                    _chatWindow = new SharedChat.ChatWindow(BaseUrl, AuthToken, _pcKey, Environment.UserName, false)
-                                    { Owner = this };
-                                    _chatWindow.Show();
-                                });
-                            }
-                        }
-                        else
-                        {
-                            // <-- Важная часть: закрыть чат у клиента, если админ поставил ON=0
-                            if (_chatWindow != null && _chatWindow.IsVisible)
-                            {
-                                Dispatcher.Invoke(() =>
-                                {
-                                    _chatWindow.Close();
-                                    _chatWindow = null;
-                                });
-                            }
-                        }
-                    }
-                }
-                catch { /* глушим ошибки */ }
-            };
-            _chatWatcher.Start();
-        }
+       
 
 
 

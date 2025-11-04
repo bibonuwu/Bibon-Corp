@@ -28,11 +28,15 @@ namespace Shared
             return string.Join("/", parts);
         }
 
-        private string BuildUrl(string pathNoJson)
+        private string BuildUrl(string pathNoJson, bool noCache = false)
         {
             var url = _baseUrl + "/" + EncodePath(pathNoJson) + ".json";
             if (!string.IsNullOrEmpty(_authToken))
                 url += (url.IndexOf('?') >= 0 ? "&" : "?") + "auth=" + _authToken;
+
+            if (noCache)
+                url += (url.IndexOf('?') >= 0 ? "&" : "?") + "nc=" + DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+
             return url;
         }
 
@@ -53,14 +57,16 @@ namespace Shared
 
         public async Task<bool> PutRawJsonAsync(string path, string json)
         {
-            var resp = await _http.PutAsync(BuildUrl(path),
+            // для PUT кэш-бастер не нужен
+            var resp = await _http.PutAsync(BuildUrl(path, noCache: false),
                 new StringContent(json, Encoding.UTF8, "application/json"));
             return resp.IsSuccessStatusCode;
         }
 
         public async Task<string> GetJsonAsync(string path)
         {
-            var resp = await _http.GetAsync(BuildUrl(path));
+            // ВАЖНО: noCache = true
+            var resp = await _http.GetAsync(BuildUrl(path, noCache: true));
             if (!resp.IsSuccessStatusCode) return null;
             return await resp.Content.ReadAsStringAsync();
         }
