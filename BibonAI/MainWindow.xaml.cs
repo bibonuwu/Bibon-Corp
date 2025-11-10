@@ -185,11 +185,21 @@ namespace BibonAI
         }
 
 
+        private string ChatPathCtrl(string pcKey, string name)
+    => $"PC List/{pcKey}/Chat/Control/{name}";
+
+        private string ChatPathPres(string pcKey, string name)
+            => $"PC List/{pcKey}/Chat/Presence/{name}";
+
         // обработчик кнопки «Проверить (Ping)»
         private async void PingAll_Click(object sender, RoutedEventArgs e)
         {
             var items = PcList.ItemsSource as List<PcItem>;
-            if (items == null || items.Count == 0) { Status.Text = "Нет элементов"; return; }
+            if (items == null || items.Count == 0)
+            {
+                Status.Text = "Нет элементов";
+                return;
+            }
 
             Status.Text = "Пингую " + items.Count + "...";
             int onlineCount = 0;
@@ -200,10 +210,33 @@ namespace BibonAI
                 bool online = await PingPcAsync(it.Key);
                 it.Online = online ? 1 : 0;      // чтобы колонка Online обновилась
                 PcList.Items.Refresh();
-                if (online) onlineCount++;
+
+                if (online)
+                {
+                    onlineCount++;
+                    // если хочешь ещё и чат включать для онлайн-клиентов,
+                    // можешь раскомментировать этот блок:
+                    /*
+                    using (var fb = new FirebaseRtdb(BaseUrl, AuthToken))
+                    {
+                        await fb.PutRawJsonAsync(ChatPathCtrl(it.Key, "ClientOpen"), "1");
+                        await fb.PutRawJsonAsync(ChatPathPres(it.Key, "ClientOnline"), "1");
+                    }
+                    */
+                }
+                else
+                {
+                    // КЛИЕНТ ОФФЛАЙН → ДЕЛАЕМ ЧАТ ОФФЛАЙН
+                    using (var fb = new FirebaseRtdb(BaseUrl, AuthToken))
+                    {
+                        await fb.PutRawJsonAsync(ChatPathCtrl(it.Key, "ClientOpen"), "0");   // админ увидит «офлайн»
+                        await fb.PutRawJsonAsync(ChatPathPres(it.Key, "ClientOnline"), "0");
+                    }
+                }
             }
 
             Status.Text = "Онлайн: " + onlineCount + " / " + items.Count;
         }
+
     }
 }

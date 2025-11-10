@@ -6,10 +6,12 @@ using System.Net.Http;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Timers;
-using System.Web.Script.Serialization;      // System.Web.Extensions
+using System.Web.Script.Serialization;
 using System.Windows;
 using System.Collections.Generic;
-using SharedChat; // чтобы видеть ChatWindow
+using SharedChat;
+using System.ComponentModel; // уже есть у тебя сверху
+
 
 namespace ClientBibon
 {
@@ -59,7 +61,8 @@ namespace ClientBibon
         {
             InitializeComponent();
 
-            // На случай жесткого завершения процесса
+            this.Closing += Window_Closing;
+
             AppDomain.CurrentDomain.ProcessExit += (s, e) =>
             {
                 try
@@ -108,9 +111,11 @@ namespace ClientBibon
 
         private static string NowLocal() => DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
 
-        private string PathOnline(string leaf) { return "PC List/" + _pcKey + "/Online or ofline/" + leaf; }
-        private string PathSysInfo(string leaf) { return "PC List/" + _pcKey + "/System Information/" + leaf; }
-
+        private string PathOnline(string leaf)
+        {
+            return "PC List/" + _pcKey + "/Online or ofline/" + leaf;
+        }
+    
         private static string GetLocalIp()
         {
             try
@@ -255,7 +260,9 @@ namespace ClientBibon
             {
                 using (var fb = new FirebaseRtdb(BaseUrl, AuthToken))
                 {
-                    await fb.PutRawJsonAsync(PathOnline("PC Online or offline"), online ? "1" : "0");
+                    await fb.PutRawJsonAsync(
+                        PathOnline("PC Online or offline"),
+                        online ? "1" : "0");
                 }
                 Status.Text = "Статус: " + (online ? "ON (1)" : "OFF (0)");
             }
@@ -264,6 +271,7 @@ namespace ClientBibon
                 Status.Text = "Ошибка статуса: " + ex.Message;
             }
         }
+
 
         private void StartPingPoll()
         {
@@ -282,16 +290,14 @@ namespace ClientBibon
             {
                 using (var fb = new FirebaseRtdb(BaseUrl, AuthToken))
                 {
-                    // читаем ping ВНУТРИ "Online or ofline"
                     var json = await fb.GetJsonAsync(PathOnline("ping"));
                     if (string.IsNullOrEmpty(json) || json == "null") return;
 
                     var token = json.Trim().Trim('"');
                     if (string.IsNullOrEmpty(token) || token == _lastPingToken) return;
 
-                    // отвечаем туда же
+                    // отвечаем только pong
                     await fb.PutRawJsonAsync(PathOnline("pong"), $"\"{token}\"");
-                    await fb.PutRawJsonAsync(PathOnline("PC Online or offline"), "1");
 
                     _lastPingToken = token;
                 }
@@ -300,8 +306,9 @@ namespace ClientBibon
         }
 
 
+
         // ===================== ЗАКРЫТИЕ ======================
-      
+
 
 
         private void StartCmdPoll()
@@ -434,7 +441,40 @@ namespace ClientBibon
 
 
 
-       
+        private async void Window_Closing(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                // останавливаем таймеры
+                _pingPollTimer?.Stop();
+                _pingPollTimer?.Dispose();
+
+                _cmdPollTimer?.Stop();
+                _cmdPollTimer?.Dispose();
+
+                _adminOpenPoll?.Stop();
+                _adminOpenPoll?.Dispose();
+
+                // ставим OFF через уже готовый метод
+                await SetOnlineAsync(false);
+
+                // фиксируем stop_time
+                if (!string.IsNullOrEmpty(_pcKey))
+                {
+                    using (var fb = new FirebaseRtdb(BaseUrl, AuthToken))
+                    {
+                        await fb.PutRawJsonAsync(
+                            PathOnline("stop_time"),
+                            "\"" + NowLocal() + "\"");
+                    }
+                }
+            }
+            catch
+            {
+                // глушим, чтобы приложение не падало при закрытии
+            }
+        }
+
 
 
 
