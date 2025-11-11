@@ -11,7 +11,9 @@ using System.Windows;
 using System.Collections.Generic;
 using SharedChat;
 using System.ComponentModel; // уже есть у тебя сверху
-
+using System.IO;
+using System.Diagnostics;
+using System.Text;
 
 namespace ClientBibon
 {
@@ -60,6 +62,8 @@ namespace ClientBibon
         public MainWindow()
         {
             InitializeComponent();
+
+
 
             this.Closing += Window_Closing;
 
