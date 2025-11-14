@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BibonAI.CommandWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Команда на ПК" Height="216" Width="779" WindowStartupLocation="CenterOwner">
+        Title="Команда на ПК" Height="779" Width="779" WindowStartupLocation="CenterOwner">
     <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -16,8 +16,41 @@
             <Button Content="Open Chat" Width="120" Margin="8,0,0,0" Click="OpenChat_Click"/>
 
         </StackPanel>
+        <Grid Grid.Row="1" Margin="0,8,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Margin="0,0,8,0">
+                    <TextBlock Text="🧩 ЧАСТЬ 1 — СИСТЕМНЫЕ И ОСНОВНЫЕ КОМАНДЫ CMD / POWERSHELL" TextWrapping="Wrap"></TextBlock>
+                    <Button Content="📋 Информация о системе" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🗑 Очистка временных файлов" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🔒 Блокировка компьютера" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🧰 Открыть диспетчер задач" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🧱 Проверка целостности Windows" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🧼 Очистить кэш обновлений Windows" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🗣 Озвучить текст через PowerShell" Click="pcoff" Margin="0,0,0,8"/>
 
-        <TextBlock x:Name="Status" Grid.Row="1" Margin="0,8,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                    <TextBlock Text="🌐 ЧАСТЬ 2 — СЕТЕВЫЕ И ПРОЧИЕ УТИЛИТЫ" TextWrapping="Wrap"></TextBlock>
+                    <Button Content="🔄 Сброс DNS (починить интернет)" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🌍 Обновить IP-адрес" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🛰 Проверить маршрут до сайта" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🔊 Издать звуковой сигнал" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="▶️ Открыть YouTube" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🧼 Очистить кэш обновлений Windows" Click="pcoff" Margin="0,0,0,8"/>
+                    <Button Content="🗣 Озвучить текст через PowerShell" Click="pcoff" Margin="0,0,0,8"/>
+
+                </StackPanel>
+
+            </Grid>
+            
+            <TextBlock x:Name="Status" Margin="0,8,0,0"/>
+
+        </Grid>
         <TextBox x:Name="ResultBox" Grid.Row="2" Margin="0,8,0,0" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
     </Grid>
 </Window>

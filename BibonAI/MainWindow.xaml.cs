@@ -204,25 +204,16 @@ namespace BibonAI
             Status.Text = "Пингую " + items.Count + "...";
             int onlineCount = 0;
 
-            // последовательно, чтобы не спамить БД
+
             foreach (var it in items)
             {
                 bool online = await PingPcAsync(it.Key);
-                it.Online = online ? 1 : 0;      // чтобы колонка Online обновилась
+                it.Online = online ? 1 : 0;
                 PcList.Items.Refresh();
 
                 if (online)
                 {
                     onlineCount++;
-                    // если хочешь ещё и чат включать для онлайн-клиентов,
-                    // можешь раскомментировать этот блок:
-                    /*
-                    using (var fb = new FirebaseRtdb(BaseUrl, AuthToken))
-                    {
-                        await fb.PutRawJsonAsync(ChatPathCtrl(it.Key, "ClientOpen"), "1");
-                        await fb.PutRawJsonAsync(ChatPathPres(it.Key, "ClientOnline"), "1");
-                    }
-                    */
                 }
                 else
                 {
@@ -234,9 +225,7 @@ namespace BibonAI
                     }
                 }
             }
-
             Status.Text = "Онлайн: " + onlineCount + " / " + items.Count;
         }
-
     }
 }

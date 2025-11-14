@@ -204,5 +204,9 @@ namespace BibonAI
             base.OnClosed(e);
         }
 
+        private void pcoff(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
